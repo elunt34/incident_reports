@@ -394,3 +394,12 @@ replace dv = 0 if dv == .
 replace totalincidents = 0 if totalincidents == .
 
 save "$clean_data\Austin\cleaned_data.dta", replace
+
+
+
+
+
+
+
+
+
