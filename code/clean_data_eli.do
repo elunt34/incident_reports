@@ -284,39 +284,6 @@ save "$clean_data\Cincinnati\cleaned_data.dta", replace
 ***Hartford***
 /* does not have available dv data so code not complete
 
-import delimited  "$raw_data\Hartford\Download20200807\Police_Incidents_01012005_to_Current.csv", clear
-
-
-*Generating incident date
-gen year = substr(date,7,4)
-gen day = substr(date,4,2)
-gen month = substr(date,1,2)
-
-destring year day month, replace
-
-gen incidentdate = mdy(month,day,year)
-	format incidentdate %d
-
-gen week = week(incidentdate)
-
-gen dv = regexm(ucr_1_category, "") //needs looking into. May not have useable data
-
-egen dvTotal = total(dv)
-
-//gen county_fips =
-
-* Drop last day in sample (sometimes only part of the day is included)
-sort incidentdate
-drop if _n==_N
-
-* collapse by day
-keep year day month week incidentdate dv dvTotal //county_fips
-
-collapse (sum) dv, by(year day month week incidentdate)
-
-save "$clean_data\Hartford\cleaned_data.dta", replace
-*/
-
 ***Denver***
 
 *read in census tract file
